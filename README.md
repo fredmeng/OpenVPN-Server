@@ -41,10 +41,10 @@ $ sudo yum install -y git
 $ cd /etc/easy-rsa/easyrsa3
 $ ./easyrsa init-pki
 $ ./easyrsa build-ca
-$ ./easyrsa build-server-full server
-$ ./easyrsa build-client-full macbook
-$ ./easyrsa build-client-full ios
-$ ./easyrsa build-client-full android
+$ ./easyrsa build-server-full server   ### for openvpn server 
+$ ./easyrsa build-client-full macbook   ### for openvpn client on mac
+$ ./easyrsa build-client-full ios.  ### for openvpn client on iphone
+$ ./easyrsa build-client-full android   ### for openvpn client on android phone
 $ ./easyrsa gen-dh
 </pre>
 
