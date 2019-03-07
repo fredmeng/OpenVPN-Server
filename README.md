@@ -1,4 +1,4 @@
-<p>This is where you’ll find step-by-step instructions regarding how to build an <b>OpenVPN server</b> on the Amazon AWS EC2.</p>
+<p>This is where you’ll find step-by-step instructions regarding how to build an <b>OpenVPN Server</b> on the Amazon AWS EC2.</p>
 
 <p>Since you are here and seeking instructions to build your own OpenVPN server, so I would assume that you should have an Amazon AWS account already and some basic knowledge about AWS.</p>
 
