@@ -161,8 +161,8 @@ cipher AES-256-CBC
 # Enable compression on the VPN link and push the
 # option to the client (v2.4+ only, for earlier
 # versions see below)
-compress lz4-v2
-push "compress lz4-v2"
+;compress lz4-v2
+;push "compress lz4-v2"
 
 # For compression compatible with older clients use comp-lzo
 # If you enable it here, you must also
