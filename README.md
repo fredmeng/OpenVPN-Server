@@ -243,3 +243,20 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <p><br>Step 10: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
 
 <pre>$ sudo service openvpn start</pre>
+
+<h2><br>How to revoke fred's access to the VPN service?</h2>
+<p><br>Step 1: Navigate to /etc/easy-rsa/easyrsa3/</p>
+<pre>$ cd /etc/easy-rsa/easyrsa3/</pre>
+<p><br>Step 2: Revoke the access</p>
+<pre>$ ./easyrsa revoke fred</pre>
+<pre>Step 3: Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
+<pre>Step 4: Enter passphrase you set for your ca.key</pre>
+<p><br>Step 5: Run gen-crl and upload a CRL</p>
+<pre>$ ./easyrsa gen-crl</pre>
+<pre>$ cd /etc/openvpn/keys/</pre>
+<pre>$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
+<p><br>Step 6: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem</p>
+<pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
+<p><br>Step 7: Restart apache</p>
+<pre>sudo service openvpn restart</pre>
+<p><br>Step 8: Now fred has lost his access to the VPN service!</p>
