@@ -1,7 +1,7 @@
 # OpenVPN-Server
-<p>This is where you’ll find step-by-step instructions regarding how to build an <b>OpenVPN Server</b> on the Amazon AWS EC2.</p>
+<p>Here are step-by-step instructions regarding how to build an <b>OpenVPN Server</b> on Amazon AWS EC2.</p>
 
-<p>Since you are here and seeking instructions to build your own OpenVPN server, so I would assume that you should have an Amazon AWS account already and some basic knowledge about AWS.</p>
+<p>Since you are here and seeking instructions to build your own OpenVPN server, so I presume you should already have an Amazon AWS account and some knowledge about AWS.</p>
 
 <h2>Launch EC2 Instance in Preferred Region</h2>
 
@@ -43,9 +43,7 @@ $ cd /etc/easy-rsa/easyrsa3
 $ ./easyrsa init-pki
 $ ./easyrsa build-ca
 $ ./easyrsa build-server-full server   ### for openvpn server 
-$ ./easyrsa build-client-full macbook   ### for openvpn client on mac
-$ ./easyrsa build-client-full ios.  ### for openvpn client on iphone
-$ ./easyrsa build-client-full android   ### for openvpn client on android phone
+$ ./easyrsa build-client-full fred   ### for openvpn client for fred
 $ ./easyrsa gen-dh
 </pre>
 
@@ -56,15 +54,16 @@ $ ./easyrsa gen-dh
 <pre>$ cd /etc/openvpn/
 $ sudo mkdir keys
 $ cd keys
-$ sudo cp /etc/easy-rsa/easyrsa3/pki/ca.crt ca.crt
-$ sudo cp /etc/easy-rsa/easyrsa3/pki/issued/server.crt server.crt
-$ sudo cp /etc/easy-rsa/easyrsa3/pki/dh.pem dh.pem
-$ sudo cp /etc/easy-rsa/easyrsa3/pki/private/server.key server.key
+$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/ca.crt ca.crt
+$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/issued/server.crt server.crt
+$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/dh.pem dh.pem
+$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/private/server.key server.key
 </pre>
 
 <p><br>Step 7: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
 
-<pre># Which TCP/UDP port should OpenVPN listen on?
+<pre>
+# Which TCP/UDP port should OpenVPN listen on?
 # If you want to run multiple OpenVPN instances
 # on the same machine, use a different port
 # number for each one.  You will need to
@@ -216,6 +215,17 @@ verb 3
 
 # Misc
 askpass pass.txt
+
+# It's a good idea to reduce the OpenVPN
+# daemon's privileges after initialization.
+#
+# You can uncomment this out on
+# non-Windows systems.
+user nobody
+group nobody
+
+# CRL-VERIFY - for revoking users
+crl-verify keys/crl.pem
 </pre>
 
 <p><br>Step 8: Have a text file named pass.txt under /etc/openvpn/, and have the passphrase you chose earlier on it. And then set the permission to 400 for security.</p>
