@@ -1,6 +1,8 @@
 # OpenVPN-Server
 <p>Here are step-by-step instructions regarding how to build an <b>OpenVPN Server</b> on Amazon AWS EC2.</p>
 
+<p>[Update on 20/Sep/2019] I just included the latest section at the bottom regarding how to revoke an access to the VPN service.</p>
+
 <p>Since you are here and seeking instructions to build your own OpenVPN server, so I presume you should already have an Amazon AWS account and some knowledge about AWS.</p>
 
 <h2>Launch EC2 Instance in Preferred Region</h2>
@@ -249,14 +251,14 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>$ cd /etc/easy-rsa/easyrsa3/</pre>
 <p><br>Step 2: Revoke the access</p>
 <pre>$ ./easyrsa revoke fred</pre>
-<pre>Step 3: Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
-<pre>Step 4: Enter passphrase you set for your ca.key</pre>
-<p><br>Step 5: Run gen-crl and upload a CRL</p>
+<pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
+<pre>Enter passphrase you set for your ca.key</pre>
+<p><br>Step 3: Run gen-crl and upload a CRL</p>
 <pre>$ ./easyrsa gen-crl</pre>
 <pre>$ cd /etc/openvpn/keys/</pre>
 <pre>$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
-<p><br>Step 6: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem</p>
+<p><br>Step 4: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem</p>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
-<p><br>Step 7: Restart apache</p>
+<p><br>Step 5: Restart apache</p>
 <pre>sudo service openvpn restart</pre>
-<p><br>Step 8: Now fred has lost his access to the VPN service!</p>
+<p><br>Step 6: Now fred has lost his access to the VPN service!</p>
