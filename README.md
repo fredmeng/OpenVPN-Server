@@ -253,12 +253,13 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>$ ./easyrsa revoke fred</pre>
 <pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
 <pre>Enter passphrase you set for your ca.key</pre>
-<p><br>Step 3: Run gen-crl and upload a CRL</p>
+<p><br>Step 3: Run gen-crl</p>
 <pre>$ ./easyrsa gen-crl</pre>
+<p><br>Step 4: Upload a CRL (if you have done it before you can skip the step)</p>
 <pre>$ cd /etc/openvpn/keys/</pre>
 <pre>$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
-<p><br>Step 4: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem</p>
+<p><br>Step 5: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem  (if you have done it before you can skip the step)</p>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
-<p><br>Step 5: Restart apache</p>
+<p><br>Step 6: Restart apache</p>
 <pre>sudo service openvpn restart</pre>
 <p><br>Step 6: Now fred has lost his access to the VPN service!</p>
