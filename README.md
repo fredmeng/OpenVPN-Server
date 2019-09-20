@@ -225,7 +225,7 @@ user nobody
 group nobody
 
 # CRL-VERIFY - for revoking users
-crl-verify keys/crl.pem
+;crl-verify keys/crl.pem
 </pre>
 
 <p><br>Step 8: Have a text file named pass.txt under /etc/openvpn/, and have the passphrase you chose earlier on it. And then set the permission to 400 for security.</p>
