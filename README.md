@@ -262,4 +262,4 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
 <p><br>Step 6: Restart apache</p>
 <pre>sudo service openvpn restart</pre>
-<p><br>Step 6: Now fred has lost his access to the VPN service!</p>
+<p><br>Step 7: Now fred has lost his access to the VPN service!</p>
