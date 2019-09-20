@@ -45,7 +45,9 @@ $ cd /etc/easy-rsa/easyrsa3
 $ ./easyrsa init-pki
 $ ./easyrsa build-ca
 $ ./easyrsa build-server-full server   ### for openvpn server 
-$ ./easyrsa build-client-full fred   ### for openvpn client for fred
+$ ./easyrsa build-client-full ios   ### for openvpn client on an iphone
+$ ./easyrsa build-client-full android   ### for openvpn client for an android phone
+$ ./easyrsa build-client-full mac   ### for openvpn client for a mac
 $ ./easyrsa gen-dh
 </pre>
 
@@ -246,11 +248,11 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 
 <pre>$ sudo service openvpn start</pre>
 
-<h2><br>How to revoke fred's access to the VPN service?</h2>
+<h2><br>How to revoke an access to the VPN service?</h2>
 <p><br>Step 1: Navigate to /etc/easy-rsa/easyrsa3/</p>
 <pre>$ cd /etc/easy-rsa/easyrsa3/</pre>
-<p><br>Step 2: Revoke the access</p>
-<pre>$ ./easyrsa revoke fred</pre>
+<p><br>Step 2: Revoke the access (Let's assume I want to revoke the access of ths iOS device that I previously granted</p>
+<pre>$ ./easyrsa revoke ios</pre>
 <pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
 <pre>Enter passphrase you set for your ca.key</pre>
 <p><br>Step 3: Run gen-crl</p>
@@ -262,4 +264,4 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
 <p><br>Step 6: Restart apache</p>
 <pre>sudo service openvpn restart</pre>
-<p><br>Step 7: Now fred has lost his access to the VPN service!</p>
+<p><br>Step 7: Now the ios device has lost the access to the VPN service!</p>
