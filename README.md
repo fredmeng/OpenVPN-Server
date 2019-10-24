@@ -147,8 +147,8 @@ push "redirect-gateway def1 bypass-dhcp"
 # Pushing DNS to clients
 push "dhcp-option DNS 1.1.1.1"  #Cloudflare
 push "dhcp-option DNS 1.0.0.1"  #Cloudflare
-# push "dhcp-option DNS 8.8.8.8" #Google Public DNS
-# push "dhcp-option DNS 8.8.4.4" #Google Public DNS
+;push "dhcp-option DNS 8.8.8.8" #Google Public DNS
+;push "dhcp-option DNS 8.8.4.4" #Google Public DNS
 
 # The keepalive directive causes ping-like
 # messages to be sent back and forth over
