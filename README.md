@@ -1,9 +1,7 @@
 # OpenVPN-Server
-<p>Here are step-by-step instructions regarding how to build an <b>OpenVPN Server</b> on Amazon AWS EC2.</p>
+<p>Step-by-step instructions to build an <b>OpenVPN Server</b> on Amazon AWS EC2.</p>
 
-<p>[Update on 20/Sep/2019] I just included the latest section at the bottom regarding how to revoke an access to the VPN service.</p>
-
-<p>Since you are here and seeking instructions to build your own OpenVPN server, so I presume you should already have an Amazon AWS account and some knowledge about AWS.</p>
+<p>Since you are here and seeking instructions to build your own OpenVPN server, so I'd presume you have an Amazon AWS account and some experiences about it.</p>
 
 <h2>Launch EC2 Instance in Preferred Region</h2>
 
