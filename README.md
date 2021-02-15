@@ -89,7 +89,7 @@ proto udp
 # On most systems, the VPN will not function
 # unless you partially or fully disable
 # the firewall for the TUN/TAP interface.
-dev tun1194
+;dev tun1194
 
 # SSL/TLS root certificate (ca), certificate
 # (cert), and private key (key).  Each client
@@ -145,8 +145,6 @@ push "redirect-gateway def1 bypass-dhcp"
 # Pushing DNS to clients
 push "dhcp-option DNS 1.1.1.1"  #Cloudflare
 push "dhcp-option DNS 1.0.0.1"  #Cloudflare
-;push "dhcp-option DNS 8.8.8.8" #Google Public DNS
-;push "dhcp-option DNS 8.8.4.4" #Google Public DNS
 
 # The keepalive directive causes ping-like
 # messages to be sent back and forth over
@@ -190,8 +188,8 @@ max-clients 10
 # accessing certain resources on restart
 # that may no longer be accessible because
 # of the privilege downgrade.
-persist-key
-persist-tun
+;persist-key
+;persist-tun
 
 # Output a short status file showing
 # current connections, truncated
@@ -229,8 +227,8 @@ askpass pass.txt
 #
 # You can uncomment this out on
 # non-Windows systems.
-user nobody
-group nobody
+;user nobody
+;group nobody
 
 # CRL-VERIFY - for revoking users
 ;crl-verify keys/crl.pem
