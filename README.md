@@ -188,8 +188,8 @@ max-clients 10
 # accessing certain resources on restart
 # that may no longer be accessible because
 # of the privilege downgrade.
-;persist-key
-;persist-tun
+persist-key
+persist-tun
 
 # Output a short status file showing
 # current connections, truncated
