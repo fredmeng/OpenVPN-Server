@@ -38,8 +38,8 @@ $ sudo yum install -y git
 
 <p><br>Step 5: Set Certificate Authority (CA) and generate certificates and keys for an OpenVPN server and clients</p>
 
-<pre>$ sudo mv ~/easy-rsa /etc
-$ cd /etc/easy-rsa/easyrsa3
+<pre>
+$ cd ~/easy-rsa/easyrsa3
 $ ./easyrsa init-pki
 $ ./easyrsa build-ca
 $ ./easyrsa build-server-full server   ### for openvpn server 
@@ -56,10 +56,10 @@ $ ./easyrsa gen-dh
 <pre>$ cd /etc/openvpn/
 $ sudo mkdir keys
 $ cd keys
-$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/ca.crt ca.crt
-$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/issued/server.crt server.crt
-$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/dh.pem dh.pem
-$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/private/server.key server.key
+$ sudo ln -s ~/easy-rsa/easyrsa3/pki/ca.crt ca.crt
+$ sudo ln -s ~/easy-rsa/easyrsa3/pki/issued/server.crt server.crt
+$ sudo ln -s ~/easy-rsa/easyrsa3/pki/dh.pem dh.pem
+$ sudo ln -s ~/easy-rsa/easyrsa3/pki/private/server.key server.key
 </pre>
 
 <p><br>Step 7: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
@@ -261,7 +261,7 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>$ ./easyrsa gen-crl</pre>
 <p><br>Step 4: Upload a CRL (if you have done it before you can skip the step)</p>
 <pre>$ cd /etc/openvpn/keys/</pre>
-<pre>$ sudo ln -s /etc/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
+<pre>$ sudo ln -s ~/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
 <p><br>Step 5: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem  (if you have done it before you can skip the step)</p>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
 <p><br>Step 6: Restart OpenVPN server</p>
