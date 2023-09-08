@@ -251,8 +251,8 @@ $ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 <pre>$ sudo service openvpn start</pre>
 
 <h2><br>How to revoke an access to the VPN service?</h2>
-<p><br>Step 1: Navigate to /etc/easy-rsa/easyrsa3/</p>
-<pre>$ cd /etc/easy-rsa/easyrsa3/</pre>
+<p><br>Step 1: Navigate to ~/easy-rsa/easyrsa3/</p>
+<pre>$ cd ~/easy-rsa/easyrsa3/</pre>
 <p><br>Step 2: Revoke the access (Let's assume I want to revoke the access of ths iOS device that I previously granted</p>
 <pre>$ ./easyrsa revoke ios</pre>
 <pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
