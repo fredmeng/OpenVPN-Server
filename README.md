@@ -1,68 +1,47 @@
 # OpenVPN-Server
-<p>Step-by-step instructions to build an <b>OpenVPN Server</b> on Amazon AWS EC2.</p>
+<p>Step-by-step guide to setting up an OpenVPN server on Amazon AWS EC2 T4g using Ubuntu 22.04 arm64.</p>
 
-<p>Since you are here and seeking instructions to build your own OpenVPN server, so I'd presume you have an Amazon AWS account and some experiences about it.</p>
+<p>Since you're looking for instructions on how to build your own OpenVPN server, I'll assume you have an Amazon AWS account and some experience with it, so I can skip the part about creating an EC2 instance.</p>
 
-<h2>Launch EC2 Instance in Preferred Region</h2>
-
-<p>6 easy steps here in total.<br><br><b>Step 1</b>: Choose a region based on your location, needs and budget</p><figure data-orig-height="424" data-orig-width="200"><img src="https://66.media.tumblr.com/04bb483eaf5ac764310f63c1cd3e04d5/tumblr_inline_onl8kw50v61rmhyfa_540.png" data-orig-height="424" data-orig-width="200"></figure><p><br><b>Step 2</b>: Choose Amazon Linux AMI</p><figure class="tmblr-full" data-orig-height="205" data-orig-width="546"><img src="https://66.media.tumblr.com/34e93a5df493fda2f17452fd6e09b59c/tumblr_inline_onl8l3MD2O1rmhyfa_540.png" data-orig-height="205" data-orig-width="546"></figure><p><br><b>Step 3</b>: Choose an instance type based on your needs</p><figure class="tmblr-full" data-orig-height="243" data-orig-width="696"><img src="https://66.media.tumblr.com/3e735870828ff621c8d5868c75c42fc9/tumblr_inline_onl8vn9Ukb1rmhyfa_540.png" data-orig-height="243" data-orig-width="696"></figure><p><br><b>Step 4</b>: Configure Security Group to meet your requirements. Here is my settings, and UDP 1194 is for my OpenVPN server</p><figure class="tmblr-full" data-orig-height="228" data-orig-width="484"><img src="https://66.media.tumblr.com/4da184b9ccf4894eeb1ebcfbd5e80f70/tumblr_inline_onl8zeKK9y1rmhyfa_540.png" data-orig-height="228" data-orig-width="484"></figure><p><br><b>Step 5</b>: Select an existing key pair or create a new key pair i.e. oven.pem</p><p><br><b>Step 6</b>: Launch the instance!<br></p>
-
-
-<h2><br>Set up OpenVPN server on AWS EC2</h2>
-
-<p>Okay! The following part is going to be a bit technical and requires you to have some Unix knowledge. If you follow everything I said here, you should be able to get a running OpenVPN server in 20 minutes.</p>
-
-<p>10 steps in total.</p>
-
+<h2><br>Installing and configuring your OpenVPN server</h2>
 
 <p><br>Step 1: ssh into the EC2 instance you set up just now</p>
 
-<pre>$ ssh -i ovpn.pem ec2-user@ec2-1-2-3-4.x.compute.amazonaws.com</pre>
+<pre>$ ssh -i ovpn.pem ec2-user@ec2-1-2-3-4.region.compute.amazonaws.com</pre>
 
-<p>Note: replace ovpn.pem and ec2-1-2-3-4.x.compute.amazonaws.com above with your actual filename and hostname</p>
-
-<p><br>Step 2: Install openvpn and git</p>
+<p><br>Step 2: Install openvpn and easy-rsa</p>
 
 <pre>$ sudo yum install -y openvpn
-$ sudo yum install -y git
+$ sudo apt install openvpn easy-rsa
 </pre>
 
-<p><br>Step 3: Follow instructions to generate ssh key and add to GitHub account</p>
-
-<p>
-<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank">https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/</a><br><a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/" target="_blank">https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/</a></p>
-
-<p><br>Step 4: Get OpenVPN/easy-rsa</p>
-
-<pre>$ git clone git@github.com:OpenVPN/easy-rsa.git</pre>
-
-<p><br>Step 5: Set Certificate Authority (CA) and generate certificates and keys for an OpenVPN server and clients</p>
+<p><br>Step 3: Set Certificate Authority (CA) and generate certificates and keys for an OpenVPN server and clients</p>
 
 <pre>
-$ cd ~/easy-rsa/easyrsa3
+$ mkdir ~/easy-rsa
+$ ln -s /usr/share/easy-rsa/* ~/easy-rsa/
+$ cd ~/easy-rsa
 $ ./easyrsa init-pki
 $ ./easyrsa build-ca
 $ ./easyrsa build-server-full server   ### for openvpn server 
-$ ./easyrsa build-client-full ios   ### for openvpn client on an iphone
-$ ./easyrsa build-client-full android   ### for openvpn client for an android phone
-$ ./easyrsa build-client-full mac   ### for openvpn client for a mac
+$ ./easyrsa build-client-full client   ### for openvpn client
 $ ./easyrsa gen-dh
 </pre>
 
 <p>Note: You will be asked to set one passphrase for each certificate and key. Choose one you like and you will need it later.</p>
 
-<p><br>Step 6: Have certificates and keys in place for OpenVPN server</p>
+<p><br>Step 4: Have certificates and keys in place for OpenVPN server</p>
 
 <pre>$ cd /etc/openvpn/
 $ sudo mkdir keys
 $ cd keys
-$ sudo ln -s ~/easy-rsa/easyrsa3/pki/ca.crt ca.crt
-$ sudo ln -s ~/easy-rsa/easyrsa3/pki/issued/server.crt server.crt
-$ sudo ln -s ~/easy-rsa/easyrsa3/pki/dh.pem dh.pem
-$ sudo ln -s ~/easy-rsa/easyrsa3/pki/private/server.key server.key
+$ sudo cp -s ~/easy-rsa/easyrsa/pki/ca.crt .
+$ sudo ln -s ~/easy-rsa/easyrsa/pki/issued/server.crt .
+$ sudo ln -s ~/easy-rsa/easyrsa/pki/dh.pem .
+$ sudo ln -s ~/easy-rsa/easyrsa/pki/private/server.key .
 </pre>
 
-<p><br>Step 7: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
+<p><br>Step 5: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
 
 <pre>
 # Which TCP/UDP port should OpenVPN listen on?
@@ -234,19 +213,18 @@ askpass pass.txt
 ;crl-verify keys/crl.pem
 </pre>
 
-<p><br>Step 8: Have a text file named pass.txt under /etc/openvpn/, and have the passphrase you chose earlier on it. And then set the permission to 400 for security.</p>
+<p><br>Step 6: Have a text file named pass.txt under /etc/openvpn/, and have the passphrase you chose earlier on it. And then set the permission to 400 for security.</p>
 
 <pre>
 $ sudo echo {your passphrase} &gt; /etc/openvpn/pass.txt
 $ sudo chmod 400 /etc/openvpn/pass.txt
 </pre>
 
-<p><br>Step 9: Enable a forwarding rule for your iptables firewall so that traffic on your 10.8.0.0 network used on your VPN connection gets routed through from the tun interface to the eth0 interface</p>
+<p><br>Step 7: Enable a forwarding rule for your iptables firewall so that traffic on your 10.8.0.0 network used on your VPN connection gets routed through from the tun interface to the eth0 interface</p>
 
-<pre>$ echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
-$ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
+<pre>$ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
 
-<p><br>Step 10: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
+<p><br>Step 8: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
 
 <pre>$ sudo service openvpn start</pre>
 
