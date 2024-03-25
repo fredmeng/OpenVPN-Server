@@ -7,7 +7,7 @@
 
 <p><br>Step 1: ssh into the EC2 instance you set up just now</p>
 
-<pre>$ ssh -i ovpn.pem ec2-user@ec2-1-2-3-4.region.compute.amazonaws.com</pre>
+<pre>$ ssh -i ovpn.pem ubuntu@ec2-1-2-3-4.region.compute.amazonaws.com</pre>
 
 <p><br>Step 2: Install openvpn and easy-rsa</p>
 
