@@ -11,7 +11,7 @@
 
 <p><br>Step 2: Install openvpn and easy-rsa</p>
 
-<pre>$ sudo yum install -y openvpn
+<pre>
 $ sudo apt install openvpn easy-rsa
 </pre>
 
