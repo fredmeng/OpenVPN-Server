@@ -222,7 +222,7 @@ $ sudo chmod 400 /etc/openvpn/pass.txt
 
 <p><br>Step 7: Enable a forwarding rule for your iptables firewall so that traffic on your 10.8.0.0 network used on your VPN connection gets routed through from the tun interface to the eth0 interface</p>
 
-<pre>$ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE</pre>
+<pre>$ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o ens5 -j MASQUERADE</pre>
 
 <p><br>Step 8: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
 
