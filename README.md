@@ -35,10 +35,10 @@ $ ./easyrsa gen-dh
 <pre>$ cd /etc/openvpn/
 $ sudo mkdir keys
 $ cd keys
-$ sudo cp -s ~/easy-rsa/easyrsa/pki/ca.crt .
-$ sudo ln -s ~/easy-rsa/easyrsa/pki/issued/server.crt .
-$ sudo ln -s ~/easy-rsa/easyrsa/pki/dh.pem .
-$ sudo ln -s ~/easy-rsa/easyrsa/pki/private/server.key .
+$ sudo cp ~/easy-rsa/easyrsa/pki/ca.crt .
+$ sudo cp ~/easy-rsa/easyrsa/pki/issued/server.crt .
+$ sudo cp ~/easy-rsa/easyrsa/pki/dh.pem .
+$ sudo cp ~/easy-rsa/easyrsa/pki/private/server.key .
 </pre>
 
 <p><br>Step 5: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
