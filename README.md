@@ -161,7 +161,7 @@ keepalive 10 120
 # Note that v2.4 client/server will automatically
 # negotiate AES-256-GCM in TLS mode.
 # See also the ncp-cipher option in the manpage
-cipher AES-256-CBC
+#cipher AES-256-CBC
 
 # Enable compression on the VPN link and push the
 # option to the client (v2.4+ only, for earlier
