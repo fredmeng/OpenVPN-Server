@@ -231,8 +231,8 @@ $ sudo chmod 400 /etc/openvpn/pass.txt
 <h2><br>How to revoke an access to the VPN service?</h2>
 <p><br>Step 1: Navigate to ~/easy-rsa</p>
 <pre>$ cd ~/easy-rsa</pre>
-<p><br>Step 2: Revoke the access (Let's assume I want to revoke the access of ths iOS device that I previously granted</p>
-<pre>$ ./easyrsa revoke ios</pre>
+<p><br>Step 2: Revoke the access (Let's assume I want to revoke the access of a client that I previously granted</p>
+<pre>$ ./easyrsa revoke client</pre>
 <pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
 <pre>Enter passphrase you set for your ca.key</pre>
 <p><br>Step 3: Run gen-crl</p>
