@@ -35,10 +35,10 @@ $ ./easyrsa gen-dh
 <pre>$ cd /etc/openvpn/
 $ sudo mkdir keys
 $ cd keys
-$ sudo cp ~/easy-rsa/easyrsa/pki/ca.crt .
-$ sudo cp ~/easy-rsa/easyrsa/pki/issued/server.crt .
-$ sudo cp ~/easy-rsa/easyrsa/pki/dh.pem .
-$ sudo cp ~/easy-rsa/easyrsa/pki/private/server.key .
+$ sudo cp ~/easy-rsa/pki/ca.crt .
+$ sudo cp ~/easy-rsa/pki/issued/server.crt .
+$ sudo cp ~/easy-rsa/pki/dh.pem .
+$ sudo cp ~/easy-rsa/pki/private/server.key .
 </pre>
 
 <p><br>Step 5: Have an OpenVPN server config ovpn.conf ready under /etc/openvpn/. Following is mine as an example.</p>
@@ -229,8 +229,8 @@ $ sudo chmod 400 /etc/openvpn/pass.txt
 <pre>$ sudo service openvpn start</pre>
 
 <h2><br>How to revoke an access to the VPN service?</h2>
-<p><br>Step 1: Navigate to ~/easy-rsa/easyrsa3/</p>
-<pre>$ cd ~/easy-rsa/easyrsa3/</pre>
+<p><br>Step 1: Navigate to ~/easy-rsa</p>
+<pre>$ cd ~/easy-rsa</pre>
 <p><br>Step 2: Revoke the access (Let's assume I want to revoke the access of ths iOS device that I previously granted</p>
 <pre>$ ./easyrsa revoke ios</pre>
 <pre>Type '<b>yes</b>' manually when you see the following message: Type the word 'yes' to continue, or any other input to abort. Continue with revocation:</pre>
@@ -239,7 +239,7 @@ $ sudo chmod 400 /etc/openvpn/pass.txt
 <pre>$ ./easyrsa gen-crl</pre>
 <p><br>Step 4: Upload a CRL (if you have done it before you can skip the step)</p>
 <pre>$ cd /etc/openvpn/keys/</pre>
-<pre>$ sudo ln -s ~/easy-rsa/easyrsa3/pki/crl.pem crl.pem</pre>
+<pre>$ sudo ln -s ~/easy-rsa/pki/crl.pem crl.pem</pre>
 <p><br>Step 5: Update your ovpn.conf and uncomment ;crl-verify keys/crl.pem  (if you have done it before you can skip the step)</p>
 <pre>;crl-verify keys/crl.pem ==> crl-verify keys/crl.pem</pre>
 <p><br>Step 6: Restart OpenVPN server</p>
