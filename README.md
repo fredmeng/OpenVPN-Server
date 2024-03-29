@@ -68,7 +68,7 @@ proto udp
 # On most systems, the VPN will not function
 # unless you partially or fully disable
 # the firewall for the TUN/TAP interface.
-dev tun1194
+dev tun
 
 # SSL/TLS root certificate (ca), certificate
 # (cert), and private key (key).  Each client
