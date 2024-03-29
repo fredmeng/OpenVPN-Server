@@ -220,7 +220,7 @@ $ sudo echo {your passphrase} &gt; /etc/openvpn/pass.txt
 $ sudo chmod 400 /etc/openvpn/pass.txt
 </pre>
 
-<p><br>Step 7: Firewall Configuration</p>
+<p><br>Step 7: Firewall & Routing Configurations</p>
 
 <pre>$ (ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)</pre> 
 My output is `ens5`, which is the public network interface of my EC2.
