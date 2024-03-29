@@ -220,9 +220,24 @@ $ sudo echo {your passphrase} &gt; /etc/openvpn/pass.txt
 $ sudo chmod 400 /etc/openvpn/pass.txt
 </pre>
 
-<p><br>Step 7: Enable a forwarding rule for your iptables firewall so that traffic on your 10.8.0.0 network used on your VPN connection gets routed through from the tun interface to the eth0 interface</p>
+<p><br>Step 7: Firewall Configuration</p>
 
-<pre>$ sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o ens5 -j MASQUERADE</pre>
+<pre>$ (ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)</pre> 
+My output is `ens5`, which is the public network interface of my EC2.
+<pre>sudo vim /etc/ufw/before.rules</pre>
+Adding the following lines before `# Don't delete these required lines, otherwise there will be errors`
+<pre># START OPENVPN RULES
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+# Allow traffic from OpenVPN client to ens5. Change ens5 to your interface here. Mine is ens5.
+-A POSTROUTING -s 10.8.0.0/8 -o ens5 -j MASQUERADE
+COMMIT
+# END OPENVPN RULES</pre>
+<pre>sudo vim /etc/default/ufw</pre>
+Change the value from DROP to ACCEPT.
+<pre>DEFAULT_FORWARD_POLICY="ACCEPT"</pre>
+<pre>sudo ufw disable;sudo ufw enable</pre>
 
 <p><br>Step 8: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
 
