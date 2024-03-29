@@ -234,10 +234,10 @@ Adding the following lines before `# Don't delete these required lines, otherwis
 -A POSTROUTING -s 10.8.0.0/8 -o ens5 -j MASQUERADE
 COMMIT
 # END OPENVPN RULES</pre>
-<pre>sudo vim /etc/default/ufw</pre>
+<pre>$ sudo vim /etc/default/ufw</pre>
 Change the value from DROP to ACCEPT.
 <pre>DEFAULT_FORWARD_POLICY="ACCEPT"</pre>
-<pre>sudo ufw disable;sudo ufw enable</pre>
+<pre>$ sudo ufw disable;sudo ufw enable</pre>
 
 <p><br>Step 8: Congratulations! It’s time to launch your first OpenVPN server on Amazon EC2!</p>
 
