@@ -235,7 +235,7 @@ Adding the following lines before `# Don't delete these required lines, otherwis
 COMMIT
 # END OPENVPN RULES</pre>
 <pre>$ sudo vim /etc/default/ufw</pre>
-Change the value from DROP to ACCEPT.
+Change the value of `DEFAULT_FORWARD_POLICY` from `DROP` to `ACCEPT`.
 <pre>DEFAULT_FORWARD_POLICY="ACCEPT"</pre>
 <pre>$ sudo ufw disable;sudo ufw enable</pre>
 
